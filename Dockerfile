@@ -9,8 +9,6 @@ RUN dnf --setopt tsflags=nodocs -y update \
  && dnf --setopt tsflags=nodocs -y install make compat-openssl10 freeglut mesa-libGLU python2 pygtk2 libcanberra-gtk2 wget bind-utils iproute net-tools \
  && wget https://download.foldingathome.org/releases/public/release/fahclient/centos-6.7-64bit/v7.5/fahclient-7.5.1-1.x86_64.rpm \
  && rpm -ihv --nodeps --noscripts fahclient-7.5.1-1.x86_64.rpm \
- && echo '65.254.110.245 assign1.foldingathome.org' >> /etc/hosts \
- && echo '18.218.241.186 assign2.foldingathome.org' >> /etc/hosts \
  && rm -rf /var/cache/yum
 
 COPY run_fahclient.sh /usr/local/bin/run_fahclient.sh
