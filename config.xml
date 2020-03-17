@@ -1,0 +1,29 @@
+<config>
+
+  <!-- Folding Slot Configuration -->
+  <gpu v='GPU'/>
+
+  <!-- HTTP Server -->
+  <allow v='0/0'/>
+
+  <!-- Remote Command Server -->
+  <password v='PASSWORD'/>
+
+  <!-- Web Server -->
+  <web-allow v='0/0'/>
+
+  <cause v='ANY'/>
+
+  <client-subtype v='LINUX'/>
+
+  <smp v='SMP'/>
+
+  <log-to-screen v='true'/>
+  <log v='/var/lib/fahclient/logs/fah_log.txt'/>
+  <log-rotate-dir v='/var/lib/fahclient/logs'/>
+
+
+  <data-directory v='/var/lib/fahclient'/>
+  <exec-directory v='/usr/bin'/>
+
+<!-- end config tag added by runtime script-->
