@@ -20,24 +20,10 @@ ALLOW=${ALLOW:-0/0}
 WEB_ALLOW=${WEB_ALLOW:-0/0}
 USER=${USER:-Anonymous}
 PASSWORD=${PASSWORD:-password}
+CAUSE=${CAUSE:-ANY}
 
-cat > /etc/fahclient/config.xml << EOF
-
-<config>
-  <!-- Folding Slot Configuration -->
-  <gpu v='$GPU'/>
-
-  <!-- HTTP Server -->
-  <allow v='$ALLOW'/>
-
-  <!-- Remote Command Server -->
-  <password v='$PASSWORD'/>
-
-  <!-- Web Server -->
-  <web-allow v='$WEB_ALLOW'/>
-
-EOF
-
+sed -i "s|smp v='SMP'|smp v='$SMP'|g" /etc/fahclient/config.xml
+sed -i "s|gpu v='GPU'|gpu v='$GPU'|g" /etc/fahclient/config.xml
 
 if [[ $USER == Anonymous ]]
 then
@@ -50,6 +36,7 @@ cat >> /etc/fahclient/config.xml << EOF
 
   <power value="light"/>
   <fold-anon value="false"/>
+
 EOF
 
 #  /usr/bin/FAHClient "--user=${USER}" "--gpu=${GPU}" "--smp=${SMP}" "--allow=${ALLOW}" "--web-allow=${WEB_ALLOW}" "--fold-anon=true" "--power=full"

@@ -15,12 +15,16 @@ COPY run_fahclient.sh /usr/local/bin/run_fahclient.sh
 
 RUN test -d /var/lib/fahclient || mkdir /var/lib/fahclient \
  && test -d /etc/fahclient || mkdir /etc/fahclient \
+ && test -d /var/lib/fahclient/logs || mkdir -p /var/lib/fahclient/logs \
+ && test -d /var/lib/fahclient/work || mkdir -p /var/lib/fahclient/work \
  && chmod +x /usr/local/bin/run_fahclient.sh \
- && useradd -r -d /var/lib/fahclient -s /sbin/nologin -c "Folding@home Client" fahclient \
- && chown -R fahclient /var/lib/fahclient /etc/fahclient \
+ && useradd -r -d /var/lib/fahclient -s /sbin/nologin -c "Folding@home Client" fahclient
+
+COPY config.xml /etc/fahclient/config.xml
+RUN chown -R fahclient /var/lib/fahclient /etc/fahclient \
  && find /var/lib/fahclient /etc/fahclient -exec chmod ug+rw,o+r '{}' \;
 
-#USER fahclient
+USER fahclient
 
 ENTRYPOINT ["/usr/local/bin/run_fahclient.sh"]
 
