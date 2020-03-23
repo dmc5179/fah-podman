@@ -1,4 +1,4 @@
-FROM ubi8/ubi:latest
+FROM centos:8
 
 LABEL maintainer "danclark@redhat.com"
 
