@@ -1,0 +1,24 @@
+FROM quay.io/fah/fah-client:v7.5.1
+
+LABEL maintainer "danclark@redhat.com"
+
+LABEL   Version="7.5.1" \
+        Release="1" \
+        summary="Folding at home client" \
+        description="Folding at home client."
+
+
+USER root
+
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV NVIDIA_VISIBLE_DEVICES=all
+
+RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
+ && dnf -y install https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-repo-rhel8-10.2.89-1.x86_64.rpm \
+ && dnf --setopt tsflags=nodocs -y install cuda-10.2.89-1.x86_64 \
+ && rm -rf /var/cache/yum
+
+USER fahclient
+
+ENTRYPOINT ["/usr/local/bin/run_fahclient.sh"]
+
