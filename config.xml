@@ -19,7 +19,7 @@
   <smp v='SMP'/>
 
   <log-to-screen v='true'/>
-  <log v='/var/lib/fahclient/logs/fah_log.txt'/>
+  <log v='/var/lib/fahclient/log.txt'/>
   <log-rotate-dir v='/var/lib/fahclient/logs'/>
 
 
