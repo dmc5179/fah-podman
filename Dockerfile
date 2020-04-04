@@ -8,12 +8,13 @@ LABEL   Version="7.5.1" \
         description="Folding at home client."
 
 # Supported BETA Versions:
-#7.4.15
-#7.4.16
-#7.4.17
-#7.4.18
-#7.5.0
-#7.5.1
+# 7.4.15
+# 7.4.16
+# 7.4.17
+# 7.4.18
+# Supported Release Version:
+# 7.5.0
+# 7.5.1
 
 ARG CLIENT_VERSION
 ENV CLIENT_VERSION=${CLIENT_VERSION:-7.5.1)

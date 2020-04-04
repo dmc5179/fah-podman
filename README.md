@@ -1,9 +1,20 @@
 # fah-podman
 Folding at home in a container
 
-# If part of a team
-sudo podman run --rm -ti --env=USER= --env=TEAM= --env=PASSKEY=  --env=GPU=false --env=SMP=false quay.io/danclark/fahclient:v7.5.1
+## Building
 
-# To run anonymously
-sudo podman run --rm -ti --env=GPU=false --env=SMP=true --env=USER=Anonymous quay.io/danclark/fahclient:v7.5.1
+Set CLIENT_VERSION to one of the supported values
 
+Supported BETA Versions:
+7.4.15
+7.4.16
+7.4.17
+7.4.18
+Supported Release Version:
+7.5.0
+7.5.1
+
+
+```
+buildah bud --build-arg CLIENT_VERSION=7.4.15 -t quay.io/fah/fah-client:v7.4.15 -f Dockerfile .
+```
