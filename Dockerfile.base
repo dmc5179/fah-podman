@@ -2,10 +2,8 @@ FROM registry.access.redhat.com/ubi8/ubi
 
 LABEL maintainer "danclark@redhat.com"
 
-LABEL   Version="7.5.1" \
-        Release="1" \
-        summary="Folding at home client" \
-        description="Folding at home client."
+LABEL   summary="Base image for folding at home client" \
+        description="Base image for fah clients"
 
 USER root
 

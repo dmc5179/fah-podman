@@ -28,7 +28,9 @@ mkdir -p /etc/fahclient || true
 mkdir -p /var/lib/fahclient/logs || true
 mkdir -p /var/lib/fahclient/work || true
 
-useradd -r -d /var/lib/fahclient -c "Folding@home Client" fahclient
+#groupadd --gid 1043 fahclient
+#useradd --uid 1043 --gid 1043 -d /var/lib/fahclient -c "Folding@home Client" fahclient
+useradd -U -d /var/lib/fahclient fahclient
 
 chown -R fahclient.root '/var/lib/fahclient' '/etc/fahclient'
 
