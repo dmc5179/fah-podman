@@ -20,5 +20,5 @@ RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.n
 
 USER fahclient
 
-ENTRYPOINT ["/usr/local/bin/run_fahclient.sh"]
+ENTRYPOINT ["/usr/bin/FAHClient"]
 
