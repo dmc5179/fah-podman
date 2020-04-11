@@ -12,6 +12,8 @@ LABEL   Version="7.5.1" \
 # 7.4.16
 # 7.4.17
 # 7.4.18
+# 7.6.1
+# 7.6.2
 # Supported Release Version:
 # 7.5.0
 # 7.5.1

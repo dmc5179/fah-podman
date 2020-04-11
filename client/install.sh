@@ -2,17 +2,23 @@
 
 # Install fahclient
 
+BASE_URL="https://download.foldingathome.org/releases/beta/release/fahclient/centos-6.7-64bit"
+
 case "${CLIENT_VERSION}" in
 
 7.4.15 | 7.4.16 | 7.4.17 | 7.4.18) 
 
-  wget https://download.foldingathome.org/releases/beta/release/fahclient/centos-6.7-64bit/v7.4/fahclient-${CLIENT_VERSION}-1.x86_64.rpm
+  wget "${BASE_URL}/v7.4/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
   ;;
 
 7.5.0 | 7.5.1)
 
-  wget https://download.foldingathome.org/releases/beta/release/fahclient/centos-6.7-64bit/v7.5/fahclient-${CLIENT_VERSION}-1.x86_64.rpm
+  wget "${BASE_URL}/v7.5/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
+  ;;
 
+7.6.1 | 7.6.2)
+
+  wget "${BASE_URL}/v7.6/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
   ;;
 
 *)
