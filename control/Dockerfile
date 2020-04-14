@@ -1,11 +1,12 @@
-FROM ubi7/ubi:latest
+FROM quay.io/fah/base:latest
+
+ARG CONTROL_VERSION
+ENV CONTROL_VERSION=${CONTROL_VERSION:-7.5.1)
 
 USER root
 
-RUN yum --setopt tsflags=nodocs -y update \
- && yum --setopt tsflags=nodocs -y install make compat-openssl10 freeglut mesa-libGLU python2 pygtk2 libcanberra-gtk2 wget xorg-x11-apps \
- && wget https://download.foldingathome.org/releases/public/release/fahcontrol/centos-6.7-64bit/v7.5/fahcontrol-7.5.1-1.noarch.rpm \
- && rpm -ihv --nodeps --noscripts fahcontrol-7.5.1-1.noarch.rpm \
+RUN wget "https://download.foldingathome.org/releases/beta/release/fahcontrol/centos-6.7-64bit/v7.6/fahcontrol-7.6.5-1.noarch.rpm" \
+ && rpm -ihv --nodeps --noscripts fahcontrol-7.6.5-1.noarch.rpm \
  && rm -rf /var/cache/yum
 
 ENTRYPOINT ["/usr/bin/FAHControl"]
