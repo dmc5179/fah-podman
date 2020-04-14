@@ -8,16 +8,18 @@ CUDA_IMAGE     ?= $(REGISTRY)/$(ORG)/fah-client-cuda
 SHELL:=bash
 OWNER:=fah
 
-# Need to list the images in build dependency order
-ALL_IMAGES:=base \
-        client \
-        control \
-        viewer
+repo = $(firstword $(subst :, ,$1))
+tag = $(or $(word 2,$(subst :, ,$1)),$(value 2))
 
+# Build the base image for the FAH Client
+build/base:
+	buildah bud --rm --force-rm --no-cache -t $(REGISTRY)/$(ORG)/base:latest -f $(notdir $@)/Dockerfile ./$(notdir $@)
+
+# Run like: make build/client:7.4.15
 build/%: DARGS?=
 build/%: ## build the latest image for a stack
-	buildah bud $(DARGS) --rm --force-rm --no-cache -t $(REGISTRY)/$(ORG)/$(notdir $@):latest -f Dockerfile ./$(notdir $@)
+	buildah bud $(DARGS) --rm --force-rm --no-cache -t $(REGISTRY)/$(ORG)/fah-$(call repo,$(notdir $@)):$(call tag,$(notdir $@)) -f $(call repo,$(notdir $@))/Dockerfile ./$(call repo,$(notdir $@))
 
-push/%: ## push the laste image for the stack
-	podman push $(REGISTRY)/$(ORG)$(notdir $@):latest
-
+#push/%: ## push the laste image for the stack
+#	podman push $(REGISTRY)/$(ORG)$(notdir $@):latest
+#
