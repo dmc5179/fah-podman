@@ -4,28 +4,7 @@
 
 BASE_URL="https://download.foldingathome.org/releases/beta/release/fahclient/centos-6.7-64bit"
 
-case "${CLIENT_VERSION}" in
-
-7.4.15 | 7.4.16 | 7.4.17 | 7.4.18) 
-
-  wget "${BASE_URL}/v7.4/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
-  ;;
-
-7.5.0 | 7.5.1)
-
-  wget "${BASE_URL}/v7.5/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
-  ;;
-
-7.6.1 | 7.6.2)
-
-  wget "${BASE_URL}/v7.6/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
-  ;;
-
-*)
-  echo "Unsupported version: ${CLIENT_VERSION}"
-  exit 1
-
-esac
+wget "${BASE_URL}/v${CLIENT_VERSION:0:3}/fahclient-${CLIENT_VERSION}-1.x86_64.rpm"
 
 rpm -ihv --nodeps --noscripts "./fahclient-*.rpm"
 
@@ -34,6 +13,8 @@ mkdir -p /etc/fahclient || true
 mkdir -p /var/lib/fahclient/logs || true
 mkdir -p /var/lib/fahclient/work || true
 
+# TODO: Setting the uid/gid here make it easier to map to the host
+#       But this has not yet been implemented
 #groupadd --gid 1043 fahclient
 #useradd --uid 1043 --gid 1043 -d /var/lib/fahclient -c "Folding@home Client" fahclient
 useradd -U -d /var/lib/fahclient fahclient
