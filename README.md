@@ -18,3 +18,9 @@ Supported Release Version:
 ```
 buildah bud --build-arg CLIENT_VERSION=7.4.15 -t quay.io/fah/fah-client:v7.4.15 -f Dockerfile .
 ```
+
+or
+
+```
+make DARGS="--build-arg CLIENT_VERSION=7.6.6" build/client:v7.6.6
+```
