@@ -9,18 +9,35 @@ ARG MAJ_VER
 ENV MAJ_VER=${MAJ_VER:-8}
 
 ARG CUDA_VER
-ENV CUDA_VER=${CUDA_VER:-cuda-10.2.89-1.x86_64}
-
-USER root
+ENV CUDA_VER=${CUDA_VER:-cuda-9.2.148-1.x86_64}
 
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_VISIBLE_DEVICES=all
 
+ARG CLIENT_VERSION
+ENV CLIENT_VERSION=${CLIENT_VERSION:-7.6.9}
+
+USER root
+
+EXPOSE 7396
+EXPOSE 36330
+
+VOLUME /var/lib/fahclient
+VOLUME /etc/fahclient
+
+COPY install.sh /tmp/install.sh
+
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-${MAJ_VER}.noarch.rpm \
  && dnf -y install curl \
- && curl https://developer.download.nvidia.com/compute/cuda/repos/rhel${MAJ_VER}/x86_64/cuda-rhel${MAJ_VER}.repo -o /etc/yum.repos.d/cuda-rhel${MAJ_VER}.repo \
+    https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.2.148-1.x86_64.rpm \
  && dnf --setopt tsflags=nodocs -y install ${CUDA_VER} \
- && rm -rf /var/cache/yum
+ && /tmp/install.sh \
+ && rm -f /tmp/install.sh \
+ && rm -rf /var/cache/yum \
+ && rm -rf /var/cache/dnf
 
-ENTRYPOINT ["/bin/bash"]
+USER fahclient
+
+ENTRYPOINT ["/usr/bin/FAHClient"]
+
 
